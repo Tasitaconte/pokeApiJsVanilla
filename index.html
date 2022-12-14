@@ -11,12 +11,19 @@
 </head>
 
 <body>
-    <h1 class="text-uppercase text-center mt-2">pokeapi-jhotto</h1>
     <div class="container mx-auto">
-        <div class="text-uppercase text-center">    
-            <div class="row pokemon-container mx-auto"></div>
-        </div> 
+        <h1 class="text-uppercase text-center mt-2">pokeapi-jhotto</h1>
+        <div class="text-uppercase text-center">
+            <div class="row pokemon-container mx-auto "></div>
+        </div>
     </div>
+
+    <div id="spinner" style=" position: absolute; display: none; top: 50%;left: 50%;" class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only"></span>
+        </div>
+    </div>
+    
     <script src="js/main.js" type="module"></script>
     <script src="./js/bootstrap.bundle.min.js"></script>
 </body>

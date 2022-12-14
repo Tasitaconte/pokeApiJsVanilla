@@ -3,5 +3,5 @@ import { api } from "./api.js"
 import { variables } from "./env.js";
 
 funcion.title(variables.TITLE);
-api.pokemons();
+api.pokemons(151);
 

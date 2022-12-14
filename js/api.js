@@ -1,49 +1,56 @@
-import { variables } from "./env.js";
+import { funcion } from "./funtion.js";
 const pokemonContainer = document.querySelector('.pokemon-container')
-
-
-
+const spinner = document.querySelector("#spinner")
+ let array = []
 function pokemon(id) {
-    var url = variables.urlApi + id;
+    var url = `https://pokeapi.co/api/v2/pokemon/${id}`
     fetch(url)
         .then(res => res.json())
         .then(data => {
-            console.log(data),
-                renderPokemon(data)
+            funcion.guardarLocal(data),
+                renderPokemon(funcion.obtenerLocal())
+            spinner.style.display = "none"
         }
         )
         .catch(e => console.error(new Error(e)));
 }
 
 function pokemons(number) {
-    for (let i = 152; i < 252; i++) {
-        pokemon(i)
-    }
+    spinner.style.display = "block";
+    setTimeout(() => {
+        for (let i = 1; i <= number; i++) {
+            pokemon(i)
+        }
+    }, 300);
 }
 
 function renderPokemon(pokemon) {
 
-    const card = document.createElement('div');
-    card.classList.add('card','mx-auto','mt-1')
-    card.style.width = '250px';
-    card.style.height = '250px';
 
+    const card = document.createElement('div');
     const sprite = document.createElement('img');
     const name = document.createElement('h4');
-
-    sprite.style.width = 'auto'
-    sprite.style.height = '200px'
-    sprite.classList.add('card-img-top', 'img-fluid')
-
-    sprite.src = pokemon.sprites.other.dream_world.front_default
-    name.textContent = pokemon.name;
-
+    const id = document.createElement('h5');
+    // 
+    card.classList.add('card', 'mx-auto', 'mt-1', 'cardTam')
+    sprite.classList.add('card-img-top', 'img-fluid', 'imgTam')
+    id.classList.add('textId');
+    sprite.src = pokemon.img;
+    // 
+    name.classList.add('letraPokemon');
+    name.textContent = pokemon.nombre;
+    // 
+    id.textContent = pokemon.id;
+    // 
+    card.appendChild(id)
     card.appendChild(sprite);
     card.appendChild(name);
-
-    pokemonContainer.appendChild(card)
+    pokemonContainer.appendChild(card);
 }
 
+function comparacion(a,b) {
+    return a-b;
+}
 
 export const api = {
     pokemon,
